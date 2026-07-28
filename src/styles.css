@@ -1,0 +1,324 @@
+:root {
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #172033;
+  background: #eaf4fc;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+select,
+textarea,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.classroom {
+  width: min(100%, 1366px);
+  height: min(calc(100vh - 32px), 768px);
+  min-height: 620px;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  overflow: hidden;
+  border: 1px solid rgba(25, 53, 134, 0.12);
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgba(25, 53, 134, 0.15);
+}
+
+.classroom-header {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(280px, 1.2fr) auto;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #dcebf7;
+}
+
+.brand-lockup,
+.header-actions,
+.lesson-timer,
+.tool-button,
+.button,
+.lesson-navigation,
+.stage-heading,
+.speaking-timer {
+  display: flex;
+  align-items: center;
+}
+
+.brand-lockup {
+  gap: 12px;
+}
+
+.brand-lockup img {
+  width: 76px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.brand-lockup div {
+  display: grid;
+  gap: 2px;
+}
+
+.brand-lockup strong {
+  color: #193586;
+}
+
+.brand-lockup span,
+.progress-copy,
+.lesson-navigation p {
+  color: #647089;
+  font-size: 0.78rem;
+}
+
+.lesson-progress {
+  display: grid;
+  gap: 6px;
+}
+
+.progress-copy {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+}
+
+progress {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 999px;
+  background: #eaf4fc;
+}
+
+progress::-webkit-progress-bar {
+  background: #eaf4fc;
+}
+
+progress::-webkit-progress-value {
+  border-radius: 999px;
+  background: linear-gradient(90deg, #193586, #268fd0);
+}
+
+progress::-moz-progress-bar {
+  border-radius: 999px;
+  background: linear-gradient(90deg, #193586, #268fd0);
+}
+
+.header-actions {
+  gap: 8px;
+}
+
+.lesson-timer {
+  gap: 4px;
+  padding: 6px 8px 6px 12px;
+  border-radius: 14px;
+  background: #f3f8fd;
+}
+
+.timer-value {
+  min-width: 48px;
+  color: #193586;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+}
+
+.icon-button,
+.tool-button {
+  min-width: 38px;
+  min-height: 38px;
+  justify-content: center;
+  border: 0;
+  border-radius: 10px;
+  color: #193586;
+  background: transparent;
+}
+
+.icon-button:hover,
+.tool-button:hover,
+.tool-button.is-active {
+  background: #eaf4fc;
+}
+
+.icon-button svg,
+.tool-button svg,
+.button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.tool-button {
+  display: grid;
+  justify-items: center;
+  gap: 1px;
+  padding: 4px 8px;
+  font-size: 0.65rem;
+}
+
+.teacher-note,
+.status-message {
+  margin: 10px 20px 0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #fff6e8;
+  color: #6a4618;
+  font-size: 0.86rem;
+}
+
+.teacher-note {
+  display: flex;
+  gap: 10px;
+}
+
+.activity-area {
+  min-height: 0;
+  padding: 18px 24px 10px;
+}
+
+.stage-frame {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 14px;
+}
+
+.stage-frame[hidden] {
+  display: none;
+}
+
+.stage-heading {
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.stage-heading h1 {
+  margin: 3px 0 0;
+  color: #193586;
+  font-size: clamp(1.75rem, 3vw, 2.7rem);
+  line-height: 1.05;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #e51b23;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.duration-pill {
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: #193586;
+  background: #eaf4fc;
+  font-weight: 800;
+}
+
+.stage-content {
+  min-height: 0;
+}
+
+.prompt-card {
+  display: grid;
+  min-height: 240px;
+  margin: 0;
+  place-items: center;
+  border: 1px solid #d8e8f5;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 90% 15%, rgba(38, 143, 208, 0.12), transparent 24%),
+    #f8fbfe;
+  color: #193586;
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  font-weight: 800;
+  text-align: center;
+}
+
+.lesson-navigation {
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 20px 16px;
+}
+
+.button {
+  min-height: 44px;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 12px;
+  padding: 0 18px;
+  font-weight: 800;
+}
+
+.button-primary {
+  color: #fff;
+  background: #193586;
+}
+
+.button-secondary {
+  color: #193586;
+  background: #eaf4fc;
+}
+
+.button:disabled {
+  opacity: 0.45;
+}
+
+.speaking-timer {
+  gap: 6px;
+}
+
+:focus-visible {
+  outline: 3px solid #268fd0;
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .classroom {
+    min-height: calc(100vh - 16px);
+    height: auto;
+  }
+
+  .classroom-header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .lesson-progress {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .brand-lockup div,
+  .tool-button span {
+    display: none;
+  }
+}

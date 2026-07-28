@@ -41,6 +41,7 @@ export interface AnswerStep {
 export interface LessonContent {
   lessonTitle: string;
   totalMinutes: number;
+  teacherNotes: string[];
   welcome: {
     title: string;
     duration: number;

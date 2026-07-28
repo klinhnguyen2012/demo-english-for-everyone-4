@@ -22,6 +22,16 @@ export const feedbackRatings: Rating[] = [
 export const lessonContent: LessonContent = {
   lessonTitle: 'Ami Connect English Demo Lesson',
   totalMinutes: 25,
+  teacherNotes: [
+    'Start with a relaxed tone and invite a full-sentence answer.',
+    'Play the passage before revealing the transcript. Ask the student to listen for the main idea.',
+    'Let the student choose freely, then ask for a reason and one example.',
+    'Reveal each answer step only after the student has tried to add that part.',
+    'Keep the exchange natural. Use the follow-up only after the student finishes speaking.',
+    'Politely disagree with the student’s first choice so the student must respond and continue the conversation.',
+    'Allow quiet planning time, then listen without interrupting until the timer ends.',
+    'Choose ratings based on today’s conversation and keep the parent summary specific and encouraging.',
+  ],
   welcome: {
     title: 'Let’s get started!',
     duration: 2,
