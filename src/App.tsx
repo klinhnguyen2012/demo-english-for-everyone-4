@@ -4,6 +4,9 @@ import { LessonNavigation } from './components/LessonNavigation';
 import { StageFrame } from './components/StageFrame';
 import { lessonContent, lessonStages } from './data/lessonContent';
 import { useCountdown } from './hooks/useCountdown';
+import { ListeningStage } from './stages/ListeningStage';
+import { TopicChoiceStage } from './stages/TopicChoiceStage';
+import { WelcomeStage } from './stages/WelcomeStage';
 
 const totalScreens = lessonStages.length + 1;
 
@@ -108,18 +111,18 @@ export default function App() {
               eyebrow={`Stage ${index + 1}`}
               hidden={currentIndex !== index}
             >
+              {index === 0 ? (
+                <WelcomeStage content={lessonContent.welcome} />
+              ) : null}
               {index === 1 ? (
-                <label>
-                  Playback speed
-                  <select aria-label="Playback speed" defaultValue="1">
-                    <option value="0.75">0.75x</option>
-                    <option value="1">1x</option>
-                    <option value="1.25">1.25x</option>
-                  </select>
-                </label>
-              ) : (
+                <ListeningStage content={lessonContent.listening} />
+              ) : null}
+              {index === 2 ? (
+                <TopicChoiceStage content={lessonContent.topicChoice} />
+              ) : null}
+              {index > 2 ? (
                 <p className="prompt-card">Let’s begin this conversation.</p>
-              )}
+              ) : null}
             </StageFrame>
           ))}
           <StageFrame
