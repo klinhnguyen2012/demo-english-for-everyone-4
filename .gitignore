@@ -2,6 +2,7 @@ node_modules/
 dist/
 playwright-report/
 test-results/
+playwright.config.ts
 outputs/
 .env
 .env.local
