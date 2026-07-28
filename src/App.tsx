@@ -3,6 +3,7 @@ import { ClassroomHeader } from './components/ClassroomHeader';
 import { LessonNavigation } from './components/LessonNavigation';
 import { StageFrame } from './components/StageFrame';
 import { lessonContent, lessonStages } from './data/lessonContent';
+import { FeedbackPanel } from './feedback/FeedbackPanel';
 import { useCountdown } from './hooks/useCountdown';
 import { ListeningStage } from './stages/ListeningStage';
 import { FinalChallengeStage } from './stages/FinalChallengeStage';
@@ -28,6 +29,7 @@ export default function App() {
   const [notesOpen, setNotesOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fullscreenMessage, setFullscreenMessage] = useState('');
+  const [sessionKey, setSessionKey] = useState(0);
   const lessonTimer = useCountdown({
     initialSeconds: lessonContent.totalMinutes * 60,
     autoStart: true,
@@ -80,6 +82,14 @@ export default function App() {
     }
   };
 
+  const restartLesson = () => {
+    setCurrentIndex(0);
+    setNotesOpen(false);
+    setFullscreenMessage('');
+    lessonTimer.reset();
+    setSessionKey((key) => key + 1);
+  };
+
   return (
     <main className="app-shell">
       <div className="classroom">
@@ -106,7 +116,7 @@ export default function App() {
           </p>
         ) : null}
 
-        <div className="activity-area">
+        <div className="activity-area" key={sessionKey}>
           {lessonStages.map((stage, index) => (
             <StageFrame
               key={stage.title}
@@ -147,7 +157,10 @@ export default function App() {
             eyebrow="Feedback"
             hidden={currentIndex !== totalScreens - 1}
           >
-            <p className="prompt-card">Review today’s conversation.</p>
+            <FeedbackPanel
+              content={lessonContent.feedback}
+              onRestart={restartLesson}
+            />
           </StageFrame>
         </div>
 
