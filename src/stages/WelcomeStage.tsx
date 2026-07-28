@@ -1,6 +1,5 @@
 import { BatteryLow, Meh, Smile } from 'lucide-react';
 import { useState } from 'react';
-import { SpeakingTimer } from '../components/SpeakingTimer';
 import type { LessonContent } from '../types/lesson';
 
 interface WelcomeStageProps {
@@ -46,10 +45,6 @@ export function WelcomeStage({ content }: WelcomeStageProps) {
           <span className="conversation-label">Your turn to speak</span>
           <p className="main-question">{content.prompt}</p>
           <p className="follow-up">{selectedMood.followUp}</p>
-          <SpeakingTimer
-            seconds={content.timerSeconds}
-            label={`${content.timerSeconds}-second speaking timer`}
-          />
         </div>
       ) : (
         <div className="conversation-placeholder">

@@ -18,6 +18,8 @@ describe('WelcomeStage', () => {
     expect(
       screen.getByText('What was the best part of your day?'),
     ).toBeVisible();
-    expect(screen.getByLabelText('20-second speaking timer')).toBeVisible();
+    expect(
+      screen.queryByLabelText(/speaking timer/i),
+    ).not.toBeInTheDocument();
   });
 });

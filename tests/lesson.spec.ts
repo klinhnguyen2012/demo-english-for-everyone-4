@@ -21,6 +21,9 @@ test.describe('Ami Connect complete lesson journey', () => {
       'aria-valuenow',
       '1',
     );
+    await expect(page.getByLabel('20-minute lesson timer')).toContainText(
+      '20:00',
+    );
 
     const documentFits = async () =>
       page.evaluate(
@@ -53,12 +56,9 @@ test.describe('Ami Connect complete lesson journey', () => {
     await expect(
       page.getByText('How has your day been so far?'),
     ).toBeVisible();
-    await page
-      .getByRole('button', { name: 'Start 20-second speaking timer' })
-      .click();
     await expect(
-      page.getByRole('button', { name: 'Pause 20-second speaking timer' }),
-    ).toBeVisible();
+      page.getByLabel('20-second speaking timer'),
+    ).not.toBeVisible();
 
     await page.getByRole('button', { name: 'Next', exact: true }).click();
     await expect(

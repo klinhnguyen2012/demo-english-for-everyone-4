@@ -47,7 +47,6 @@ export interface LessonContent {
     duration: number;
     moods: MoodOption[];
     prompt: string;
-    timerSeconds: number;
   };
   listening: {
     title: string;

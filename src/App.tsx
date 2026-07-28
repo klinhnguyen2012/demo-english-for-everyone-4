@@ -97,6 +97,7 @@ export default function App() {
           currentIndex={currentIndex}
           total={totalScreens}
           timer={lessonTimer}
+          timerDurationMinutes={lessonContent.totalMinutes}
           notesOpen={notesOpen}
           onToggleNotes={() => setNotesOpen((open) => !open)}
           isFullscreen={isFullscreen}

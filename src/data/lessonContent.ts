@@ -21,7 +21,7 @@ export const feedbackRatings: Rating[] = [
 
 export const lessonContent: LessonContent = {
   lessonTitle: 'Ami Connect English Demo Lesson',
-  totalMinutes: 25,
+  totalMinutes: 20,
   teacherNotes: [
     'Start with a relaxed tone and invite a full-sentence answer.',
     'Play the passage before revealing the transcript. Ask the student to listen for the main idea.',
@@ -44,7 +44,6 @@ export const lessonContent: LessonContent = {
       },
     ],
     prompt: 'How has your day been so far?',
-    timerSeconds: 20,
   },
   listening: {
     title: 'Listen carefully',

@@ -57,6 +57,9 @@ describe('App classroom shell', () => {
       'aria-valuenow',
       '1',
     );
+    expect(screen.getByLabelText('20-minute lesson timer')).toHaveTextContent(
+      '20:00',
+    );
   });
 
   it('keeps teacher guidance hidden until the teacher opens it', async () => {

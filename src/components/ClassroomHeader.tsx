@@ -18,6 +18,7 @@ interface ClassroomHeaderProps {
     pause: () => void;
     reset: () => void;
   };
+  timerDurationMinutes: number;
   notesOpen: boolean;
   onToggleNotes: () => void;
   isFullscreen: boolean;
@@ -28,6 +29,7 @@ export function ClassroomHeader({
   currentIndex,
   total,
   timer,
+  timerDurationMinutes,
   notesOpen,
   onToggleNotes,
   isFullscreen,
@@ -61,7 +63,10 @@ export function ClassroomHeader({
       </div>
 
       <div className="header-actions">
-        <div className="lesson-timer" aria-label="25-minute lesson timer">
+        <div
+          className="lesson-timer"
+          aria-label={`${timerDurationMinutes}-minute lesson timer`}
+        >
           <span className="timer-value">{formatTime(timer.secondsLeft)}</span>
           <button
             className="icon-button"
