@@ -13,6 +13,7 @@ test.describe('Ami Connect complete lesson journey', () => {
     page.on('pageerror', (error) => consoleProblems.push(error.message));
 
     await page.goto('/');
+    await expect(page).toHaveTitle('Demo-English-for-Everyone-4');
     await expect(
       page.getByRole('heading', { name: 'Let’s get started!' }),
     ).toBeVisible();

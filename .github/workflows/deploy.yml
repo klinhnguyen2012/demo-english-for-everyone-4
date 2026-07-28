@@ -1,4 +1,4 @@
-name: Deploy Ami Connect lesson to GitHub Pages
+name: Deploy Demo-English-for-Everyone-4 to GitHub Pages
 
 on:
   push:
