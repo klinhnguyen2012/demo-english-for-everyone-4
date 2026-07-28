@@ -36,4 +36,56 @@ describe('useAudioRecorder', () => {
     expect(result.current.status).toBe('unsupported');
     expect(result.current.message).toMatch(/not available/i);
   });
+
+  it('keeps a completed recording in a local replay URL and cleans it up', async () => {
+    const stopTrack = vi.fn();
+    const stream = {
+      getTracks: () => [{ stop: stopTrack }],
+    } as unknown as MediaStream;
+    const createObjectURL = vi.fn().mockReturnValue('blob:lesson-recording');
+    const revokeObjectURL = vi.fn();
+    class MediaRecorderStub {
+      state: RecordingState = 'inactive';
+      mimeType = 'audio/webm';
+      ondataavailable: ((event: BlobEvent) => void) | null = null;
+      onstop: (() => void) | null = null;
+
+      start() {
+        this.state = 'recording';
+      }
+
+      stop() {
+        this.state = 'inactive';
+        this.ondataavailable?.({
+          data: new Blob(['audio'], { type: 'audio/webm' }),
+        } as BlobEvent);
+        this.onstop?.();
+      }
+    }
+    vi.stubGlobal('MediaRecorder', MediaRecorderStub);
+    vi.stubGlobal(
+      'URL',
+      Object.assign(class extends URL {}, {
+        createObjectURL,
+        revokeObjectURL,
+      }),
+    );
+    Object.defineProperty(navigator, 'mediaDevices', {
+      configurable: true,
+      value: { getUserMedia: vi.fn().mockResolvedValue(stream) },
+    });
+    const { result, unmount } = renderHook(() => useAudioRecorder());
+
+    await act(() => result.current.start());
+    expect(result.current.status).toBe('recording');
+
+    act(() => result.current.stop());
+    expect(result.current.status).toBe('ready');
+    expect(result.current.audioUrl).toBe('blob:lesson-recording');
+    expect(createObjectURL).toHaveBeenCalledOnce();
+
+    unmount();
+    expect(revokeObjectURL).toHaveBeenCalledWith('blob:lesson-recording');
+    expect(stopTrack).toHaveBeenCalled();
+  });
 });

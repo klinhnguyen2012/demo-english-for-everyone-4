@@ -103,18 +103,20 @@ export default function App() {
           onToggleFullscreen={toggleFullscreen}
         />
 
-        {notesOpen ? (
-          <aside className="teacher-note" aria-label="Teacher notes">
-            <strong>Teacher note</strong>
-            <span>{lessonContent.teacherNotes[currentIndex]}</span>
-          </aside>
-        ) : null}
+        <div className="message-strip">
+          {notesOpen ? (
+            <aside className="teacher-note" aria-label="Teacher notes">
+              <strong>Teacher note</strong>
+              <span>{lessonContent.teacherNotes[currentIndex]}</span>
+            </aside>
+          ) : null}
 
-        {fullscreenMessage ? (
-          <p className="status-message" role="status">
-            {fullscreenMessage}
-          </p>
-        ) : null}
+          {fullscreenMessage ? (
+            <p className="status-message" role="status">
+              {fullscreenMessage}
+            </p>
+          ) : null}
+        </div>
 
         <div className="activity-area" key={sessionKey}>
           {lessonStages.map((stage, index) => (

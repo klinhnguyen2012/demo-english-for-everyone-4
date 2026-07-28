@@ -24,6 +24,7 @@ export function useAudioRecorder() {
   const streamRef = useRef<MediaStream | null>(null);
   const chunksRef = useRef<Blob[]>([]);
   const urlRef = useRef('');
+  const mountedRef = useRef(true);
 
   const clearUrl = useCallback(() => {
     if (urlRef.current) {
@@ -38,18 +39,21 @@ export function useAudioRecorder() {
     streamRef.current = null;
   }, []);
 
-  useEffect(
-    () => () => {
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
       if (recorderRef.current?.state === 'recording') {
+        recorderRef.current.ondataavailable = null;
+        recorderRef.current.onstop = null;
         recorderRef.current.stop();
       }
       stopTracks();
       if (urlRef.current) {
         URL.revokeObjectURL(urlRef.current);
       }
-    },
-    [stopTracks],
-  );
+    };
+  }, [stopTracks]);
 
   const start = useCallback(async () => {
     if (!supported) {
@@ -78,6 +82,11 @@ export function useAudioRecorder() {
           type: recorder.mimeType || 'audio/webm',
         });
         const nextUrl = URL.createObjectURL(blob);
+        if (!mountedRef.current) {
+          URL.revokeObjectURL(nextUrl);
+          stopTracks();
+          return;
+        }
         urlRef.current = nextUrl;
         setAudioUrl(nextUrl);
         setStatus('ready');

@@ -89,9 +89,10 @@ p {
 }
 
 .brand-lockup img {
-  width: 76px;
+  width: 108px;
   height: 48px;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
 }
 
 .brand-lockup div {
@@ -192,6 +193,10 @@ progress::-moz-progress-bar {
   gap: 1px;
   padding: 4px 8px;
   font-size: 0.65rem;
+}
+
+.message-strip {
+  min-height: 0;
 }
 
 .teacher-note,
