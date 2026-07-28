@@ -5,6 +5,10 @@ import { StageFrame } from './components/StageFrame';
 import { lessonContent, lessonStages } from './data/lessonContent';
 import { useCountdown } from './hooks/useCountdown';
 import { ListeningStage } from './stages/ListeningStage';
+import { FinalChallengeStage } from './stages/FinalChallengeStage';
+import { SpeakingMissionStage } from './stages/SpeakingMissionStage';
+import { StrongerAnswerStage } from './stages/StrongerAnswerStage';
+import { TeacherQuestionsStage } from './stages/TeacherQuestionsStage';
 import { TopicChoiceStage } from './stages/TopicChoiceStage';
 import { WelcomeStage } from './stages/WelcomeStage';
 
@@ -120,8 +124,21 @@ export default function App() {
               {index === 2 ? (
                 <TopicChoiceStage content={lessonContent.topicChoice} />
               ) : null}
-              {index > 2 ? (
-                <p className="prompt-card">Let’s begin this conversation.</p>
+              {index === 3 ? (
+                <StrongerAnswerStage content={lessonContent.strongerAnswer} />
+              ) : null}
+              {index === 4 ? (
+                <TeacherQuestionsStage
+                  content={lessonContent.teacherQuestions}
+                />
+              ) : null}
+              {index === 5 ? (
+                <SpeakingMissionStage content={lessonContent.mission} />
+              ) : null}
+              {index === 6 ? (
+                <FinalChallengeStage
+                  content={lessonContent.finalChallenge}
+                />
               ) : null}
             </StageFrame>
           ))}
