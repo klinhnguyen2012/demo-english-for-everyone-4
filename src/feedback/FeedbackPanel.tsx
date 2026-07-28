@@ -172,6 +172,13 @@ export function FeedbackPanel({
           <Sparkles aria-hidden="true" />
           Generate summary
         </button>
+        <p
+          className="teacher-guidance feedback-guidance"
+          role="note"
+          aria-label="Teacher handoff instructions"
+        >
+          {content.guidance}
+        </p>
 
         {summary ? (
           <div className="summary-card reveal">

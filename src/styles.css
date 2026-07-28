@@ -1450,6 +1450,10 @@ progress::-moz-progress-bar {
   margin-top: 9px;
 }
 
+.feedback-guidance {
+  margin-top: 6px;
+}
+
 .summary-card {
   display: grid;
   gap: 7px;

@@ -103,5 +103,6 @@ export interface LessonContent {
     title: string;
     categories: FeedbackCategory[];
     ratings: Rating[];
+    guidance: string;
   };
 }

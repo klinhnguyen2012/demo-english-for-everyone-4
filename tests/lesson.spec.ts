@@ -32,18 +32,27 @@ test.describe('Ami Connect complete lesson journey', () => {
     expect(await documentFits()).toBe(true);
 
     await page.getByRole('button', { name: 'Enter fullscreen' }).click();
-    const fullscreenOpened = await page
-      .getByRole('button', { name: 'Exit fullscreen' })
-      .isVisible()
-      .catch(() => false);
-    const fullscreenFallback = await page
+    const exitFullscreen = page.getByRole('button', {
+      name: 'Exit fullscreen',
+    });
+    const fullscreenFallback = page
       .getByRole('status')
-      .filter({ hasText: /Fullscreen/ })
-      .isVisible()
-      .catch(() => false);
-    expect(fullscreenOpened || fullscreenFallback).toBe(true);
-    if (fullscreenOpened) {
-      await page.getByRole('button', { name: 'Exit fullscreen' }).click();
+      .filter({ hasText: /Fullscreen/ });
+    await expect
+      .poll(async () => {
+        const fullscreenOpened = await exitFullscreen
+          .isVisible()
+          .catch(() => false);
+        const fullscreenFallbackVisible = await fullscreenFallback
+          .isVisible()
+          .catch(() => false);
+
+        return fullscreenOpened || fullscreenFallbackVisible;
+      })
+      .toBe(true);
+
+    if (await exitFullscreen.isVisible().catch(() => false)) {
+      await exitFullscreen.click();
     }
 
     await page.getByRole('button', { name: 'Show teacher notes' }).click();
@@ -105,7 +114,12 @@ test.describe('Ami Connect complete lesson journey', () => {
     await expect(
       page.getByText('How does technology make your daily life easier?'),
     ).toBeVisible();
-    await expect(page.getByText(/^What to do\?/)).toBeVisible();
+    await expect(
+      page.getByText(
+        'What to do? Give the student 2 minutes to think, then 1 minute to speak. Restart for each follow-up question.',
+        { exact: true },
+      ),
+    ).toBeVisible();
     await expect(
       page.getByLabel('Think and speak timer', { exact: true }),
     ).toContainText(/Think\s*2:00/);
@@ -188,6 +202,12 @@ test.describe('Ami Connect complete lesson journey', () => {
       .click();
 
     await page.getByRole('button', { name: 'Next', exact: true }).click();
+    const handoffGuidance = page.getByRole('note', {
+      name: 'Teacher handoff instructions',
+    });
+    await expect(handoffGuidance).toContainText(
+      'send the summary to Ms. Soan',
+    );
     await page
       .locator('.rating-table fieldset')
       .filter({ hasText: 'Listening' })
@@ -205,6 +225,7 @@ test.describe('Ami Connect complete lesson journey', () => {
       .getByLabel('Next learning step')
       .fill('Use more linking phrases.');
     await page.getByRole('button', { name: 'Generate summary' }).click();
+    await expect(handoffGuidance).toBeVisible();
     await expect(page.getByLabel('Generated summary')).toHaveValue(
       /Listening: Strong/,
     );

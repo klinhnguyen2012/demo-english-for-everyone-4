@@ -60,4 +60,26 @@ describe('FeedbackPanel', () => {
     expect(confirm).toHaveBeenCalledOnce();
     expect(onRestart).toHaveBeenCalledOnce();
   });
+
+  it('keeps the teacher handoff instructions visible after generating', async () => {
+    const user = userEvent.setup();
+    render(
+      <FeedbackPanel
+        content={lessonContent.feedback}
+        onRestart={vi.fn()}
+      />,
+    );
+
+    const guidance = screen.getByRole('note', {
+      name: 'Teacher handoff instructions',
+    });
+    expect(guidance).toHaveTextContent(
+      'What to do? Complete all ratings and feedback notes, click Generate summary, then copy and send the summary to Ms. Soan.',
+    );
+
+    await user.click(
+      screen.getByRole('button', { name: 'Generate summary' }),
+    );
+    expect(guidance).toBeVisible();
+  });
 });

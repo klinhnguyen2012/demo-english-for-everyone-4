@@ -222,6 +222,8 @@ export const lessonContent: LessonContent = {
     title: 'Teacher feedback',
     categories: feedbackCategories,
     ratings: feedbackRatings,
+    guidance:
+      'What to do? Complete all ratings and feedback notes, click Generate summary, then copy and send the summary to Ms. Soan.',
   },
 };
 
