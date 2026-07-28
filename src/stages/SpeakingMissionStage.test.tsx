@@ -10,6 +10,9 @@ describe('SpeakingMissionStage', () => {
     render(<SpeakingMissionStage content={lessonContent.mission} />);
 
     expect(screen.queryByText('Mission completed!')).not.toBeInTheDocument();
+    expect(
+      screen.queryByLabelText('Think and speak timer'),
+    ).not.toBeInTheDocument();
     await user.click(
       screen.getByRole('button', { name: 'Visit a science museum' }),
     );

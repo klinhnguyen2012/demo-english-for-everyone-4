@@ -64,6 +64,9 @@ test.describe('Ami Connect complete lesson journey', () => {
     await expect(
       page.getByRole('heading', { name: 'Listen carefully' }),
     ).toBeVisible();
+    await expect(
+      page.getByLabel('Think and speak timer', { exact: true }),
+    ).not.toBeVisible();
     await page.getByRole('button', { name: 'Back', exact: true }).click();
     await expect(
       page.getByRole('heading', { name: 'Let’s get started!' }),
@@ -102,10 +105,19 @@ test.describe('Ami Connect complete lesson journey', () => {
     await expect(
       page.getByText('How does technology make your daily life easier?'),
     ).toBeVisible();
+    await expect(page.getByText(/^What to do\?/)).toBeVisible();
+    await expect(
+      page.getByLabel('Think and speak timer', { exact: true }),
+    ).toContainText(/Think\s*2:00/);
+    await page.getByRole('button', { name: 'Start think timer' }).click();
+    await page.getByRole('button', { name: 'Pause think timer' }).click();
     await page.getByRole('button', { name: 'Need some words?' }).click();
     await expect(page.getByText('communicate')).toBeVisible();
     await page.getByRole('button', { name: 'Next question' }).click();
     await expect(page.getByText('Can you give me an example?')).toBeVisible();
+    await expect(
+      page.getByLabel('Think and speak timer', { exact: true }),
+    ).toContainText(/Think\s*2:00/);
 
     await page.getByRole('button', { name: 'Next', exact: true }).click();
     for (const step of ['Answer', 'Reason', 'Example', 'Ask Back']) {
@@ -142,6 +154,9 @@ test.describe('Ami Connect complete lesson journey', () => {
     await expect(page.getByText('Question 2 of 6')).toBeVisible();
 
     await page.getByRole('button', { name: 'Next', exact: true }).click();
+    await expect(
+      page.getByLabel('Think and speak timer', { exact: true }),
+    ).not.toBeVisible();
     await page
       .getByRole('button', { name: 'Visit a science museum' })
       .click();

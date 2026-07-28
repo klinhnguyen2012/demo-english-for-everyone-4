@@ -28,7 +28,12 @@ describe('ListeningStage', () => {
     const user = userEvent.setup();
     render(<ListeningStage content={lessonContent.listening} />);
 
-    expect(screen.queryByText(lessonContent.listening.passage)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(lessonContent.listening.passage),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByLabelText('Think and speak timer'),
+    ).not.toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Show transcript' }));
     expect(screen.getByText(lessonContent.listening.passage)).toBeVisible();
   });
