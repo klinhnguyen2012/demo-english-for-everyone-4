@@ -334,6 +334,82 @@ progress::-moz-progress-bar {
   background: #fff;
 }
 
+.think-speak-timer {
+  width: min(100%, 430px);
+  min-height: 58px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid #cfe2f2;
+  border-radius: 16px;
+  padding: 8px 10px 8px 14px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(25, 53, 134, 0.06);
+}
+
+.think-speak-timer.is-speak {
+  border-color: rgba(229, 27, 35, 0.35);
+  background: #fffafa;
+}
+
+.think-speak-timer.is-complete {
+  border-color: rgba(19, 122, 82, 0.28);
+  background: #f5fcf9;
+}
+
+.guided-timer-readout {
+  min-width: 84px;
+  display: grid;
+  gap: 1px;
+}
+
+.guided-timer-label {
+  color: #268fd0;
+  font-size: 0.64rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.is-speak .guided-timer-label {
+  color: #e51b23;
+}
+
+.is-complete .guided-timer-label {
+  color: #137a52;
+  letter-spacing: 0.04em;
+}
+
+.guided-timer-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: #7b879d;
+  font-size: 0.68rem;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.guided-timer-track svg {
+  width: 14px;
+  height: 14px;
+}
+
+.guided-timer-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.complete-icon {
+  width: 22px;
+  height: 22px;
+  margin: 0 8px;
+  color: #137a52;
+}
+
 :focus-visible {
   outline: 3px solid #268fd0;
   outline-offset: 3px;
@@ -1451,6 +1527,22 @@ progress::-moz-progress-bar {
 
   .checkpoint-list {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .think-speak-timer {
+    width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .think-speak-timer {
+    grid-template-columns: 1fr auto;
+  }
+
+  .guided-timer-track {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
   }
 }
 
