@@ -114,6 +114,12 @@ export const lessonContent: LessonContent = {
       'Would your friends agree?',
       'What are the advantages and disadvantages?',
     ],
+    timing: {
+      thinkSeconds: 120,
+      speakSeconds: 60,
+      guidance:
+        'What to do? Give the student 2 minutes to think, then 1 minute to speak. Restart for each follow-up question.',
+    },
   },
   strongerAnswer: {
     title: 'Build a stronger answer',

@@ -1,5 +1,6 @@
 import { BookOpen, Gamepad2, Laptop, Lightbulb } from 'lucide-react';
 import { useState } from 'react';
+import { ThinkSpeakTimer } from '../components/ThinkSpeakTimer';
 import type { LessonContent } from '../types/lesson';
 
 interface TopicChoiceStageProps {
@@ -54,6 +55,12 @@ export function TopicChoiceStage({ content }: TopicChoiceStageProps) {
               {content.followUps[followUpIndex]}
             </p>
           ) : null}
+          <p className="teacher-guidance">{content.timing.guidance}</p>
+          <ThinkSpeakTimer
+            key={`${selectedIndex}-${followUpIndex ?? 'main'}`}
+            thinkSeconds={content.timing.thinkSeconds}
+            speakSeconds={content.timing.speakSeconds}
+          />
           <div className="support-actions">
             <button
               className="button button-secondary"

@@ -62,6 +62,11 @@ export interface LessonContent {
     duration: number;
     topics: TopicOption[];
     followUps: string[];
+    timing: {
+      thinkSeconds: number;
+      speakSeconds: number;
+      guidance: string;
+    };
   };
   strongerAnswer: {
     title: string;

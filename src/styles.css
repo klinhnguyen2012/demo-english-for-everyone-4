@@ -797,6 +797,14 @@ progress::-moz-progress-bar {
   padding: 22px;
 }
 
+.teacher-guidance {
+  margin: 0;
+  color: #7b879d;
+  font-size: 0.72rem;
+  font-weight: 550;
+  line-height: 1.45;
+}
+
 .support-actions {
   margin-top: 2px;
 }
